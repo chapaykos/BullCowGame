@@ -18,17 +18,17 @@ int FBullCowGame::GetMaxTries() const
 	return MyMaxTries ;
 }
 
-int FBullCowGame::GetCurrentTry() const
+int FBullCowGame::GetCurrentTry() const // TODO add incrementation of the current attempt
 {
 	return MyCurrentTry;
 }
 
-bool FBullCowGame::IsGameWon() const
+bool FBullCowGame::IsGameWon() const // TODO implement check mechanic
 {
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(std::string)
+bool FBullCowGame::CheckGuessValidity(std::string) // TODO implement guess validity mechanics
 {
 	return false;
 }
