@@ -1,14 +1,18 @@
 #pragma once
+#include <string>
 
 class FBullCowGame
 {
 public:
-	void IntroduceGame();
-	bool AskToPlay();
-	bool CheckIfIsogram();
-	int CheckTheLength();
-	void ShowRemainingTries();
+	void FBUllCowGame(); // constructor
+	int GetMaxTries() const;
+	int GetCurrentTry() const; 
+	bool IsGameWon() const;
+
+	void Reset();
+	bool CheckGuessValidity(std::string);
 
 private:
-
+	int MyCurrentTry;
+	int MyMaxTries;
 };

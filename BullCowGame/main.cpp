@@ -1,13 +1,15 @@
 #include <iostream> // standard libraries
 #include <string>
+#include "FBullCowGame.h"
 // #include "myCode.h" // user libraries
-using namespace std;
 
 void PrintIntro();
 void PlayGame();
-string GetGuess();
+std::string GetGuess();
 void PrintBackGuess();
 bool AskToPlayAgain();
+
+FBullCowGame BCGame; // instantiate a new game
 
 int main()
 {
@@ -22,44 +24,48 @@ int main()
 // introduce the game
 void PrintIntro()
 {
-	constexpr int WORD_LENGTH = 5;
-	cout << "Welcome to Bulls and Cows, an amazing word game!\n";
-	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
+	constexpr int WORD_LENGTH = 5; // TODO ask player how long the word should be
+	std::cout << "Welcome to Bulls and Cows, an amazing word game!\n";
+	std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
 	return;
 }
 
 // get a guess from the player
-string GetGuess()
+std::string GetGuess()
 {
-	string Guess = "";
-	cout << "My guess is: ";
-	getline(cin, Guess);
+	int CurrentGuess = BCGame.GetCurrentTry();
+
+	std::string Guess = "";
+	std::cout << "Try " << CurrentGuess << ". My guess is: ";
+	std::getline(std::cin, Guess);
 	return Guess;
 }
 
 bool AskToPlayAgain()
 {
-	cout << "Do you want to play again? (Y/N) ";
-	string Response = "";
-	getline(cin, Response);
-	return (Response[0] == 'y' || Response[0] == 'Y');
+	std::cout << "Do you want to play again? (Y/N) ";
+	std::string Response = "";
+	std::getline(std::cin, Response);
+	return (Response[0] == 'y' || Response[0] == 'Y'); // TODO validate the 'n/N' for no and repeat the question if the input was invalid
 }
 
 // repeat the guess back to user
-void PrintBackGuess(string guess)
+void PrintBackGuess(std::string guess)
 {
-	cout << "Your guess is " << guess << ".\n";
+	std::cout << "Your guess is " << guess << ".\n";
 	return;
 }
 
 // main game mechanics
 void PlayGame()
 {
-	constexpr int ATTEMPTS_LIMIT = 5;
-	for (int i = 0; i < ATTEMPTS_LIMIT; i++)
+	BCGame.Reset();
+	int MaxTries = BCGame.GetMaxTries();
+	// loop for the number of turns asking for guesses
+	for (int i = 0; i < MaxTries; i++) // TODO change loop to WHILE - progress only if the input was valid
 	{
-		string UserGuess = GetGuess();
+		std::string UserGuess = GetGuess(); // TODO guess validation - isogram, right length, one word, only alphabetical letters
 		PrintBackGuess(UserGuess);
-		cout << endl;
+		std::cout << std::endl;
 	}
 }
